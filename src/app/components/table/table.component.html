@@ -1,6 +1,13 @@
 <app-filter (emisor)="applyFilter($event)"></app-filter>
 <!--<input matInput (keyup)="applyFilter($event)" placeholder="Filter" />-->
-
+<button
+  mat-fab
+  color="primary"
+  aria-label="Example icon button with a home icon"
+  (click)="handleShowOrUpdate({}, 'create')"
+>
+  <mat-icon>add</mat-icon>
+</button>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -41,6 +48,7 @@
         mat-fab
         color="primary"
         aria-label="Example icon button with a home icon"
+        (click)="handleShowOrUpdate(element, 'show')"
       >
         <mat-icon>visibility</mat-icon>
       </button>
@@ -48,6 +56,7 @@
         mat-fab
         color="primary"
         aria-label="Example icon button with a home icon"
+        (click)="handleShowOrUpdate(element, 'edit')"
       >
         <mat-icon>create</mat-icon>
       </button>
