@@ -6,6 +6,7 @@ import {
 } from '@angular/material/dialog';
 
 export interface PeriodicElement {
+  id: number;
   user: string;
   email: string;
   firstname: string;
@@ -25,7 +26,9 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: PeriodicElement
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

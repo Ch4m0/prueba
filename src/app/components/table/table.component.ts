@@ -9,6 +9,7 @@ import {
 import { DialogComponent } from '../dialog/dialog.component';
 
 export interface PeriodicElement {
+  id: number;
   user: string;
   email: string;
   firstname: string;
@@ -19,6 +20,7 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
+    id: 1,
     user: 'simon.castañeda',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -26,6 +28,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 2,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -33,6 +36,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 3,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -40,6 +44,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 4,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -47,6 +52,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 5,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -54,6 +60,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 6,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -61,6 +68,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 7,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -68,6 +76,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 8,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -75,6 +84,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     state: true,
   },
   {
+    id: 9,
     user: 'abner.chamorro',
     email: 'abnercd93@gmail.com',
     firstname: 'Abner',
@@ -114,6 +124,7 @@ export class TableComponent implements AfterViewInit {
   }
 
   ngOnInit() {
+    console.log(this.dataSource, 'DATASOURCE');
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return (
         data.user.toLowerCase().includes(filter) ||
@@ -123,6 +134,21 @@ export class TableComponent implements AfterViewInit {
         data.state.toString() === filter
       );
     };
+  }
+
+  addUser(user: PeriodicElement) {
+    let data = this.dataSource.data;
+    data.unshift(user);
+    this.dataSource.data = data;
+    console.log(this.dataSource);
+    console.log(this.dataSource.data);
+  }
+
+  updateUser(user: PeriodicElement) {
+    let data = this.dataSource.data;
+    var foundIndex = data.findIndex((x) => x.id == user.id);
+    data[foundIndex] = user;
+    this.dataSource.data = data;
   }
 
   handleShowOrUpdate(element: any, typeAction: string): void {
@@ -135,6 +161,14 @@ export class TableComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
+      switch (result.action) {
+        case 'create':
+          this.addUser(result);
+          break;
+        case 'edit':
+          this.updateUser(result);
+          break;
+      }
     });
   }
 }

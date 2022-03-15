@@ -27,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const materialModules = [
   CdkTreeModule,
@@ -57,6 +58,7 @@ const materialModules = [
   OverlayModule,
   PortalModule,
   MatDialogModule,
+  MatSlideToggleModule,
 ];
 
 @NgModule({
